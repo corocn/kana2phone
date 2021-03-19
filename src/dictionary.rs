@@ -8,7 +8,6 @@ pub static PHONE_DICT_1: phf::Map<&'static str, &str> = phf_map! {
     "ウ" => "u",
     "エ" => "e",
     "オ" => "o",
-    "ー" => ":",
     "ヲ" => "o",
     "ヴ" => "b u",
     "ツ" => "ts u",
