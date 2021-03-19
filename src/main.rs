@@ -1,37 +1,32 @@
-use phf::phf_map;
-
 mod dictionary;
-use dictionary::PHONE_DICT;
+use dictionary::{PhoneDict, PHONE_DICT_1, PHONE_DICT_2};
 
 fn main() {
-    println!("{}", AIUEO);
+    let s = String::from("ツトゥトゥーイェアー");
+    let s = kana2phone(&s);
+    dbg!(s);
+}
 
-    let text = String::from("アイウエオ");
-    let phone = kana2phone(&text);
+fn replace_to_phoneme(text: &str, dict: &PhoneDict) -> String {
+    let mut s: String = text.to_string();
 
-    println!("{}", phone);
+    let keys = dict.keys();
+    for key in keys {
+        let replace_text = format!(" {} ", dict[*key]);
+        s = s.replace(*key, &replace_text);
+    }
+
+    s
 }
 
 fn kana2phone(text: &str) -> String {
-    let v: Vec<&str> = text.split("").collect();
-    let v: Vec<&str> = v
-        .iter()
-        .filter(|&&x| x != String::from(""))
-        .cloned()
-        .collect::<Vec<&str>>();
+    let s = String::from("ツトゥトゥーイェアー");
+    let s = replace_to_phoneme(&s, &PHONE_DICT_2);
+    let s = replace_to_phoneme(&s, &PHONE_DICT_1);
+    let s = s.replace("  ", " ");
+    let s = s.trim().to_string();
 
-    let mut result: Vec<&str> = vec![];
-    // let target = "";
-    for s in v.iter().rev().cloned() {
-        let p = match PHONE_DICT.get(s).cloned() {
-            Some(s) => s,
-            None => panic!("この文字列は扱えないウホ: {}", s),
-        };
-        result.push(p);
-    }
-
-    let rev: Vec<&str> = result.iter().rev().cloned().collect();
-    rev.join(" ")
+    s
 }
 
 #[cfg(test)]
@@ -54,7 +49,6 @@ mod tests {
     #[test]
     fn test2() {
         assert_eq!(kana2phone(&String::from("チヮヮ")), "ch i w a w a");
-
         assert_eq!(kana2phone(&String::from("ピャピュピョ")), "py a py u py o");
     }
 }
