@@ -1,6 +1,6 @@
 use phf::phf_map;
 
-static PHONE_TABLE: phf::Map<&'static str, &str> = phf_map! {
+static PHONE_DICT: phf::Map<&'static str, &str> = phf_map! {
     "ア" => "a",
     "イ" => "i",
     "ウ" => "u",
@@ -163,13 +163,17 @@ fn kana2phone(text: &str) -> String {
         .collect::<Vec<&str>>();
 
     let mut result: Vec<&str> = vec![];
-    let target = "";
-
-    for x in v {
-        result.push(PHONE_TABLE[x])
+    // let target = "";
+    for s in v.iter().rev().cloned() {
+        let p = match PHONE_DICT.get(s).cloned() {
+            Some(s) => s,
+            None => panic!("この文字列は扱えないウホ: {}", s)
+        };
+        result.push(p);
     }
 
-    result.join(" ")
+    let rev: Vec<&str> = result.iter().rev().cloned().collect();
+    rev.join(" ")
 }
 
 #[cfg(test)]
