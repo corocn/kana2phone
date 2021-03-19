@@ -1,8 +1,9 @@
 mod dictionary;
 use dictionary::{PhoneDict, PHONE_DICT_1, PHONE_DICT_2};
+use regex::Regex;
 
 fn main() {
-    let s = String::from("ツトゥトゥーイェアー");
+    let s = String::from("ツトゥトゥーーーイェアー");
     let s = kana2phone(&s);
     dbg!(s);
 }
@@ -20,11 +21,19 @@ fn replace_to_phoneme(text: &str, dict: &PhoneDict) -> String {
 }
 
 fn kana2phone(text: &str) -> String {
-    let s = String::from("ツトゥトゥーイェアー");
+    let s = text.to_string();
     let s = replace_to_phoneme(&s, &PHONE_DICT_2);
     let s = replace_to_phoneme(&s, &PHONE_DICT_1);
     let s = s.replace("  ", " ");
     let s = s.trim().to_string();
+    let s = s.replace("  ", " ");
+    let s = s.replace(" :", ":");
+
+    let re = Regex::new(r":+").unwrap();
+    let s = re.replace_all(&s, ":").to_string();
+
+    let re2 = Regex::new(r"^:\s").unwrap();
+    let s = re2.replace_all(&s, "").to_string();
 
     s
 }
@@ -50,5 +59,18 @@ mod tests {
     fn test2() {
         assert_eq!(kana2phone(&String::from("チヮヮ")), "ch i w a w a");
         assert_eq!(kana2phone(&String::from("ピャピュピョ")), "py a py u py o");
+    }
+
+    #[test]
+    fn test3() {
+        assert_eq!(kana2phone(&String::from("ダンボール")), "d a N b o: r u");
+        assert_eq!(
+            kana2phone(&String::from("ダンボーーール")),
+            "d a N b o: r u"
+        );
+        assert_eq!(
+            kana2phone(&String::from("ーーダンボーーールーー")),
+            "d a N b o: r u:"
+        );
     }
 }
