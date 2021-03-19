@@ -1,8 +1,8 @@
 use phf::phf_map;
 
-pub type PhoneDict = phf::Map<&'static str, &'static str>;
+pub type PhonemeDict = phf::Map<&'static str, &'static str>;
 
-pub static PHONE_DICT_1: PhoneDict = phf_map! {
+pub static PHONE_DICT_1: PhonemeDict = phf_map! {
     "ア" => "a",
     "イ" => "i",
     "ウ" => "u",
@@ -79,7 +79,7 @@ pub static PHONE_DICT_1: PhoneDict = phf_map! {
     "ー" => ":",
 };
 
-pub static PHONE_DICT_2: PhoneDict = phf_map! {
+pub static PHONE_DICT_2: PhonemeDict = phf_map! {
     "トゥ" => "t u",
     "ジェ" => "j e",
     "ツァ" => "ts a",

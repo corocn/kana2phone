@@ -1,5 +1,5 @@
 mod dictionary;
-use dictionary::{PhoneDict, PHONE_DICT_1, PHONE_DICT_2};
+use dictionary::{PhonemeDict, PHONE_DICT_1, PHONE_DICT_2};
 use regex::Regex;
 
 pub fn kana2phone(text: &str) -> String {
@@ -20,7 +20,7 @@ pub fn kana2phone(text: &str) -> String {
     s
 }
 
-fn replace_to_phoneme(text: &str, dict: &PhoneDict) -> String {
+fn replace_to_phoneme(text: &str, dict: &PhonemeDict) -> String {
     let mut s: String = text.to_string();
 
     let keys = dict.keys();
