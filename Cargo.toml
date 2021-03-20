@@ -1,8 +1,16 @@
 [package]
 name = "kana2phone"
+description = "a kana string to phoneme"
 version = "0.1.0"
 authors = ["corocn <crsk.plmzh@gmail.com>"]
+license = "MIT"
+categories = ["text-processing"]
 edition = "2018"
+keywords = ["japanese", "kana", "phoneme", "phone", "katakana"]
+readme = "README.md"
+homepage = "https://github.com/corocn/kana2phone"
+repository = "https://github.com/corocn/kana2phone"
+include = ["src/**/*", "LICENSE", "README.md"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
