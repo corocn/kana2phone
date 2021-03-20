@@ -1,9 +1,13 @@
 use kana2phone::kana2phone;
 
 fn main() {
-    // TODO: 標準入力を受け取って変換するところ
-
-    let s = String::from("ホゲホゲホゲ");
+    let s = readline();
     let s = kana2phone(&s);
     println!("{}", s);
+}
+
+fn readline() -> String {
+    let mut s = String::new();
+    std::io::stdin().read_line(&mut s).unwrap();
+    s.trim_end().to_owned()
 }
