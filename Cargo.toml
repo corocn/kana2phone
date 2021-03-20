@@ -1,7 +1,7 @@
 [package]
 name = "kana2phone"
 description = "a kana string to phoneme"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["corocn <crsk.plmzh@gmail.com>"]
 license = "MIT"
 categories = ["text-processing"]
