@@ -71,4 +71,12 @@ mod tests {
             "g a o g a i g a:"
         );
     }
+
+    #[test]
+    fn test4() {
+        assert_eq!(
+            kana2phone(&String::from("ヤッター")),
+            "y a q t a:"
+        )
+    }
 }

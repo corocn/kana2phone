@@ -76,6 +76,7 @@ pub static PHONE_DICT_1: PhonemeDict = phf_map! {
     "シ" => "sh i",
     "チ" => "ch i",
     "ヮ" => "w a",
+    "ッ" => "q",
     "ー" => ":",
 };
 
